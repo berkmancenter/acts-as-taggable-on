@@ -19,6 +19,10 @@ class ActsAsTaggableOnMigration < ActiveRecord::Migration
       t.datetime :created_at
     end
 
+    add_index :tags, :name
+    add_index :tags, :ancestry
+    add_index :tags, :position
+
     add_index :taggings, :tag_id
     add_index :taggings, [:taggable_id, :taggable_type, :context]
   end
