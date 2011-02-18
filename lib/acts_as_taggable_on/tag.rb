@@ -4,6 +4,9 @@ module ActsAsTaggableOn
   
     attr_accessible :name
 
+    has_ancestry
+    acts_as_list
+
     ### ASSOCIATIONS:
 
     has_many :taggings, :dependent => :destroy, :class_name => 'ActsAsTaggableOn::Tagging'

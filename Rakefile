@@ -52,6 +52,8 @@ begin
     gemspec.homepage = "http://github.com/mbleigh/acts-as-taggable-on"
     gemspec.authors = ["Michael Bleigh"]
     gemspec.files =  FileList["[A-Z]*", "{generators,lib,spec,rails}/**/*"] - FileList["**/*.log"]
+#    gemspec.add_dependency = 'acts_as_list', '0.1.2'
+#    gemspec.add_dependency = 'ancestry', '1.2.0'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
