@@ -2,10 +2,10 @@ module ActsAsTaggableOn
   class Tag < ::ActiveRecord::Base
     include ActsAsTaggableOn::ActiveRecord::Backports if ::ActiveRecord::VERSION::MAJOR < 3
   
-    attr_accessible :name, :parent_id
+    attr_accessible :name, :parent_id, :parent
 
     has_ancestry
-    acts_as_list
+    acts_as_list :scope => 'ancestry = #{connection.quote(ancestry)}'
 
     ### ASSOCIATIONS:
 
@@ -14,7 +14,7 @@ module ActsAsTaggableOn
     ### VALIDATIONS:
 
     validates_presence_of :name
-    validates_uniqueness_of :name
+    validates_uniqueness_of :name, :scope => :ancestry
 
     ### SCOPES:
     
@@ -67,6 +67,10 @@ module ActsAsTaggableOn
 
     def to_s
       name
+    end
+
+    def hierarchical_name(sep = ' -> ')
+      self.ancestors.collect{|anc| anc.name}.push(self.name).join(sep)
     end
 
     def count
