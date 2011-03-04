@@ -14,7 +14,7 @@ module ActsAsTaggableOn
     ### VALIDATIONS:
 
     validates_presence_of :name
-    validates_uniqueness_of :name, :scope => :ancestry
+    validates_uniqueness_of :name, :case_sensitive => false, :scope => :ancestry
 
     ### SCOPES:
     
